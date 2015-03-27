@@ -12,6 +12,7 @@ def dbrib_data():
     cursor = db_connection.cursor()
     cursor.execute("select * from GCM")
     for i in cursor:
+        #print i
         for item in i:
             if type(item) == datetime.datetime:
                 dt = item.strftime("%d %B %Y %I:%M%p")
@@ -20,12 +21,24 @@ def dbrib_data():
                 gcm_list.append(item)
         #print datetime.datetime(2015, 3, 22, 18, 33, 46).isoformat(' ')
         gcm_results_list = map(list, zip(*[iter(gcm_list)]*len(i)))
-
+    #print gcm_results_list
     for gcm,urg,impl,appr,server,crt,start in gcm_results_list:
         value = gcm,urg,impl,appr,server,crt,start
+        print value
         f.write(str(value) + '\n')
     cursor.close()
     db_connection.close()
+
+#def copy_table():
+#    db_connection = cx_Oracle.connect('reports/password@192.168.1.201/xe')
+#    cursor = db_connection.cursor()
+#    cursor.execute("COPY TO reports/password@192.168.1.201/xe APPEND TOOLS (GCMID) USING select GCMID from GCM")
+#    #COPY FROM <db> TO <db> <opt> <table> { (<cols>) } USING <sel>
+#    db_connection.commit()
+#    cursor.close()
+#    db_connection.close()
+
+
 
 def html_table():
     fw.write('<table border="1" style="width:100%">\n')
@@ -50,6 +63,9 @@ def html_table():
         fw.write('<td><form><input type="text" name="action"></form></td>\n')
         fw.write(' </tr>\n')
     fw.write('</table>\n')
+
+
+#copy_table()
 
 f = open('output.html','r+')
 f.truncate(0)

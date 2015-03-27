@@ -1,0 +1,20 @@
+from django.conf.urls import patterns, include, url
+from django.views.generic.list import ListView
+
+from cabapp.models import Tool
+from cabapp.views import ToolList
+
+from django.contrib import admin
+
+    # Examples:
+    # url(r'^$', 'mysite.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+
+tool_info = {'model' : Tool}
+
+urlpatterns = patterns('',
+    (r'^tools/$', ListView.as_view(
+        model=Tool,queryset=Tool.objects.all()
+        )),
+    (r'^admin/', include(admin.site.urls)),
+)
