@@ -44,7 +44,7 @@ def copy_data():
     cursorGet.execute("select * from GETDATA.GCM")
 
     #Connection and Query details - Destination
-    db_dest_connection = cx_Oracle.connect('reports/password@192.168.1.201/xe')
+    db_dest_connection = cx_Oracle.connect('django/django@192.168.1.201/xe')
     #db_dest_connection = cx_Oracle.connect('%s' % dest_creds)
     cursorInsert = db_dest_connection.cursor()
 

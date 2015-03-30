@@ -4,7 +4,6 @@
 </head>
 <body>
 <div id="content">
-<input type="button" value="Refresh!!!!" id="refresh" />
 <a href="/employees/create" class="addlink">Add New Employee</a>
 {% if object_list %}
   <table id="gcm_list" frame="hsides" rules="cols" style="border-width: 5px">
@@ -31,6 +30,10 @@
     </tr>
   {% endfor %}
   </table>
+    <form action="refresh.html" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Refresh">
+    </form>
 {% else %}
   <p>No employees found.</p>
 {% endif %}

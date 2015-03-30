@@ -5,4 +5,5 @@ from cabapp.views import ToolList
 
 urlpatterns = patterns('',
     (r'^$', ToolList.as_view()),
+    (r'^refresh.html', views.cp),
 )
