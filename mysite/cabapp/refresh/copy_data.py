@@ -44,7 +44,7 @@ def copy_data():
     cursorGet.execute("select * from GETDATA.GCM")
 
     #Connection and Query details - Destination
-    db_dest_connection = cx_Oracle.connect('reports/password@192.168.1.201/xe')
+    db_dest_connection = cx_Oracle.connect('django/django@192.168.1.201/xe')
     #db_dest_connection = cx_Oracle.connect('%s' % dest_creds)
     cursorInsert = db_dest_connection.cursor()
 
@@ -81,8 +81,14 @@ def copy_data():
         cursorInsert.execute(query)
         db_dest_connection.commit()
 
-    #Close cursorInsert and close connection to Destionation DB
+    #Close cursorInsert and close connection to Destination DB
     cursorInsert.close()
     db_dest_connection.close()
-
+"""
+    filelog = open('output.log',mode='r+')
+    dt = str(datetime.datetime.now()) + '\n'
+    filelog.write('Call successful\n')
+    filelog.write(dt)
+    filelog.close()
+"""
 copy_data()

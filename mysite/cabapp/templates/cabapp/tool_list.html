@@ -4,7 +4,6 @@
 </head>
 <body>
 <div id="content">
-<a href="/employees/create" class="addlink">Add New Employee</a>
 {% if object_list %}
   <table id="gcm_list" frame="hsides" rules="cols" style="border-width: 5px">
     <tr>
@@ -32,10 +31,18 @@
   </table>
     <form action="refresh.html" method="post">
         {% csrf_token %}
-        <input type="submit" value="Refresh">
+        <input type="submit" value="Refresh" name="refresh">
+    </form>
+    <form action="truncate.html" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Truncate" name="truncate">
     </form>
 {% else %}
-  <p>No employees found.</p>
+  <p>There are no items present</p>
+        <form action="refresh.html" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Refresh" name="refresh">
+    </form>
 {% endif %}
 </div>
 </body>
